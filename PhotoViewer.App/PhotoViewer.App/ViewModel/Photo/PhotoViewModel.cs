@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -24,12 +25,10 @@ namespace PhotoViewer.App.ViewModel
         {
             _dataService = dataService;
             PreferenceGroups = new ObservableCollection<PreferenceGroup>();
-            var photoGroups = from photo in _dataService.GetPhoto()
-                              group photo by photo.CreationTime;
-
-            foreach (var items in photoGroups)
+            foreach (var items in _dataService.GetPhoto().GroupBy(p => p.CreationTime))
             {
-                var item = new PreferenceGroup() { Name = items.Key, SelectionMode = 1 };
+                DateTime date = Convert.ToDateTime(items.Key);
+                var item = new PreferenceGroup() { Name = $" {date.ToString("ddd", new CultureInfo("ru-RU"))}, {date.ToString("MMM", new CultureInfo("ru-RU"))}. {date.Year} г.", SelectionMode = 1 };
                 foreach (var i in items)
                     item.Preferences.Add(i);
                 PreferenceGroups.Add(item);
