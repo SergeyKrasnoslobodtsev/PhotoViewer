@@ -85,6 +85,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\UriToImageConverter.cs" />
+    <Compile Include="Helpers\ActivityFeedLayout.cs" />
     <Compile Include="Helpers\DriveEx.cs" />
     <Compile Include="Helpers\FileData.cs" />
     <Compile Include="Helpers\IconHelpers.cs" />

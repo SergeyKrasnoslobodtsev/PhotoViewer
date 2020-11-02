@@ -14,7 +14,7 @@ namespace PhotoViewer.App.Converters
             if (value != null)
                 using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read)) {
                     bitmap.BeginInit();
-                    bitmap.DecodePixelHeight = 400;
+                    bitmap.DecodePixelHeight = 170;
                     bitmap.CacheOption = BitmapCacheOption.OnLoad;
                     bitmap.StreamSource = stream;
                     bitmap.EndInit();

@@ -5,22 +5,65 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PhotoViewer.App.Views"
       xmlns:converter="clr-namespace:PhotoViewer.App.Converters"
+      xmlns:vm="clr-namespace:PhotoViewer.App.ViewModel"
       mc:Ignorable="d" 
       DataContext="{Binding Photo, Source={StaticResource Locator}}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PhotoPage">
+
     <Page.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converter:UriToImageConverter x:Key="UriToImageConverter"/>
+        <Style x:Key="OrderRadioButton" TargetType="{x:Type RadioButton}"></Style>
+        <Style x:Key="OrderCheckboxButton" TargetType="{x:Type ToggleButton}"></Style>
+        <Style x:Key="OrderProductButton" TargetType="{x:Type Button}"></Style>
     </Page.Resources>
-    <Grid x:Name="ContentPanel" Grid.Row="1">
+
+    <ListBox Name="items" ItemsSource="{Binding PreferenceGroups}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" local:PixelBasedScrollingBehavior.IsEnabled="True">
+        <ItemsControl.Resources>
+            <ItemsPanelTemplate x:Key="wrapPanel">
+                <WrapPanel/>
+            </ItemsPanelTemplate>
+
+            <DataTemplate x:Key="SoloSelection" DataType="local:PreferenceGroup">
+                <ItemsControl ItemsSource="{Binding Preferences}" ItemsPanel="{StaticResource wrapPanel}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Image Margin="2" Height="200" Source="{Binding Path, Converter={StaticResource UriToImageConverter}, IsAsync=True}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DataTemplate>
+        </ItemsControl.Resources>
+
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <StackPanel>
+                    <TextBlock FontSize="25" FontWeight="Light" Margin="0,8,0,5" Text="{Binding Name}"/>
+                    <ContentControl Content="{Binding}" Name="items"/>
+                </StackPanel>
+
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding SelectionMode}" Value="1">
+                        <Setter TargetName="items" Property="ContentTemplate" Value="{StaticResource SoloSelection}"/>
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <VirtualizingStackPanel x:Name="panel" Orientation="Vertical" VirtualizationMode="Recycling" local:PixelBasedScrollingBehavior.IsEnabled="True"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+
+    </ListBox>
+
+    <!--<Grid x:Name="ContentPanel" Grid.Row="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListBox ItemsSource="{Binding Items}" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                 local:ScrollViewerMonitor.NextCommand="{Binding FetchMoreDataCommand}"
-                 local:ScrollViewerMonitor.PreviewCommand="{Binding PreviewDataCommand}">
+        <ListBox ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>
@@ -28,12 +71,12 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Image Height="200" Source="{Binding Path, Converter={StaticResource UriToImageConverter}}"/>
+                    <Image Source="{Binding Path, Converter={StaticResource UriToImageConverter}, IsAsync=True}" Stretch="None"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <Grid Grid.Row="1" Visibility="{Binding Busy, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ProgressBar IsIndeterminate="{Binding Busy}" VerticalAlignment="Bottom" Grid.Row="1" />
         </Grid>
-    </Grid>
+    </Grid>-->
 </Page>
