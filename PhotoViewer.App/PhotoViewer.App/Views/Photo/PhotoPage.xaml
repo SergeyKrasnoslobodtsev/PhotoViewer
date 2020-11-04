@@ -3,10 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PhotoViewer.App.Views"
+      xmlns:helpers="clr-namespace:PhotoViewer.App.Helpers"
       xmlns:converter="clr-namespace:PhotoViewer.App.Converters"
       xmlns:ui="http://schemas.modernwpf.com/2019"
-      xmlns:vm="clr-namespace:PhotoViewer.App.ViewModel"
+      xmlns:local="clr-namespace:PhotoViewer.App.Views"
       mc:Ignorable="d" 
       DataContext="{Binding Photo, Source={StaticResource Locator}}"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -15,99 +15,14 @@
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/PhotoViewer.App;component/Styles/Icons.xaml" />
+                <ResourceDictionary Source="/PhotoViewer.App;component/Styles/MiniatureStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style x:Key="CircleButton" TargetType="ToggleButton">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ToggleButton}">
-                            <Border x:Name="border" CornerRadius="1000" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                                <ui:PathIcon Data="{StaticResource unchecked}"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" TargetName="border" Value="White"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="White"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Background" TargetName="border" Value="White"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="Gray"/>
-                                </Trigger>
-                                <Trigger Property="ToggleButton.IsChecked" Value="True">
-                                    <Setter Property="Background" TargetName="border" Value="White"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="Gray"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Background" TargetName="border" Value="White"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="Gray"/>
-                                    <Setter Property="Foreground" Value="Transparent"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <converter:UriToImageConverter x:Key="UriToImageConverter"/>
-            <Style x:Key="OrderRadioButton" TargetType="{x:Type RadioButton}"></Style>
-            <Style x:Key="OrderCheckboxButton" TargetType="{x:Type ToggleButton}"></Style>
-            <Style x:Key="OrderProductButton" TargetType="{x:Type Button}"></Style>
         </ResourceDictionary>
-        
     </Page.Resources>
 
-    <ListBox Name="items" ItemsSource="{Binding PreferenceGroups}" 
-             VirtualizingPanel.IsVirtualizingWhenGrouping="True" 
-             VirtualizingPanel.IsVirtualizing="True" 
-             VirtualizingPanel.ScrollUnit="Pixel" 
-             VirtualizingPanel.CacheLength="2"
-             ScrollViewer.CanContentScroll="True" 
-             HorizontalContentAlignment="Stretch" 
-             ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-             local:PixelBasedScrollingBehavior.IsEnabled="True">
-        <ItemsControl.Resources>
-            <ItemsPanelTemplate x:Key="wrapPanel">
-                <WrapPanel/>
-            </ItemsPanelTemplate>
-            <DataTemplate x:Key="SoloSelection" DataType="local:PreferenceGroup">
-                <ItemsControl ItemsSource="{Binding Preferences}" ItemsPanel="{StaticResource wrapPanel}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Image Grid.RowSpan="2" Margin="2" Height="200" Source="{Binding Path, Converter={StaticResource UriToImageConverter}, IsAsync=True}"/>
-                                <ToggleButton Opacity="10" Style="{StaticResource CircleButton}" Width="24" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </DataTemplate>
-        </ItemsControl.Resources>
-
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource BaseTextBlockStyle}" Margin="0,8,0,5" Text="{Binding Name}"/>
-                    </StackPanel>
-                    <ContentControl Content="{Binding}" Name="items"/>
-                </StackPanel>
-
-                <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding SelectionMode}" Value="1">
-                        <Setter TargetName="items" Property="ContentTemplate" Value="{StaticResource SoloSelection}"/>
-                    </DataTrigger>
-                </DataTemplate.Triggers>
-
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <VirtualizingStackPanel x:Name="panel" Orientation="Vertical" VirtualizationMode="Recycling" local:PixelBasedScrollingBehavior.IsEnabled="True"/>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-
-    </ListBox>
+    <ui:ItemsRepeaterScrollHost>
+        <ui:ScrollViewerEx>
+            <ui:ItemsRepeater ItemsSource="{Binding PreferenceGroups}" ItemTemplate="{StaticResource Groups}" ScrollViewer.CanContentScroll="True" Background="White"/>
+        </ui:ScrollViewerEx>
+    </ui:ItemsRepeaterScrollHost>
 </Page>

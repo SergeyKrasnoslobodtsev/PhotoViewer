@@ -6,15 +6,17 @@
              xmlns:vm="clr-namespace:PhotoViewer.App.ViewModel" 
              d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:ui="http://schemas.modernwpf.com/2019">
-  <Application.Resources>
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <ui:ThemeResources />
-        <ui:XamlControlsResources />
-        <!-- Other merged dictionaries here -->
-      </ResourceDictionary.MergedDictionaries>
-      <!-- Other app resources here -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemeResources />
+                <ui:XamlControlsResources />
+                <!-- Other merged dictionaries here -->
+                <ResourceDictionary Source="/PhotoViewer.App;component/Styles/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
             <vm:ViewModelLocator x:Key="Locator" />
+
         </ResourceDictionary>
-  </Application.Resources>
+    </Application.Resources>
 </Application>

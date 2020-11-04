@@ -2,10 +2,14 @@
 using PhotoViewer.App.Model;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PhotoViewer.App.Services
 {
@@ -17,11 +21,15 @@ namespace PhotoViewer.App.Services
         public IEnumerable<Photo> GetPhoto()
         {
             var photo = new List<Photo>();
-            foreach (var item in GetFileInfo().Result.OrderByDescending(p => p.CreationTime))
-                photo.Add(new Photo() { 
-                    Path = item.Path, 
-                    CreationTime = item.CreationTime.ToString("dd.MM.yyyy"), 
-                    Name = item.Name });
+            foreach (var item in GetFileInfo().Result.OrderByDescending(p => p.CreationTime)) {
+                var info = new FileInfo(item.Path);
+                photo.Add(new Photo() {
+                    Path = item.Path,
+                    CreationTime = item.CreationTime.ToString("dd.MM.yyyy"),
+                    Name = item.Name
+                });
+            }
+
             return photo;
         }
     }

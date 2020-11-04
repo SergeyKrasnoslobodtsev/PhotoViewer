@@ -10,12 +10,7 @@
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="MainWindow" Height="648.506" Width="902.212">
     <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/PhotoViewer.App;component/Styles/Icons.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        </ResourceDictionary>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
     <Grid>
         <ui:NavigationView x:Name="Nav" OpenPaneLength="200" OverflowLabelMode="NoLabel" IsBackButtonVisible="Collapsed" PaneDisplayMode="Left" SelectionChanged="Nav_SelectionChanged" >
