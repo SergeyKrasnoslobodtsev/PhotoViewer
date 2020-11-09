@@ -15,7 +15,7 @@ namespace PhotoViewer.App.Converters
                 var path = value as string;
                 var bitmap = new BitmapImage();
                 if (value != null) {
-                   bitmap = CreateBitmap(path);
+                   bitmap = Helpers.ImageHelpers.CreateBitmap(path);
                     
                     // Crop image (cut the side which is too long)
                     //var expectedHeightAtCurrentWidth = width * 4.0 / 3.0;
@@ -36,59 +36,6 @@ namespace PhotoViewer.App.Converters
             throw new NotSupportedException();
         }
 
-        private static BitmapImage CreateBitmap(string path) {
-            var bi = new BitmapImage();
-            
-            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read)) {
-                bi.BeginInit();
-                bi.DecodePixelHeight = 400;
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.StreamSource = stream;
-                bi.EndInit();
-                bi.Freeze();
-            }
-            return bi;
-        }
-
-
-        private BitmapImage ScaleImage(BitmapImage original, double scale) {
-            var scaledBitmapSource = new TransformedBitmap();
-            scaledBitmapSource.BeginInit();
-            scaledBitmapSource.Source = original;
-            scaledBitmapSource.Transform = new ScaleTransform(scale, scale);
-            scaledBitmapSource.EndInit();
-            return BitmapSourceToBitmap(scaledBitmapSource);
-        }
-
-
-
-        private BitmapImage CropImage(BitmapImage original, int width, int height) {
-            var deltaWidth = original.PixelWidth - width;
-            var deltaHeight = original.PixelHeight - height;
-            var marginX = deltaWidth / 2;
-            var marginY = deltaHeight / 2;
-            var rectangle = new Int32Rect(marginX, marginY, width, height);
-            var croppedBitmap = new CroppedBitmap(original, rectangle);
-            return BitmapSourceToBitmap(croppedBitmap);
-        }
-
-
-
-        private BitmapImage BitmapSourceToBitmap(BitmapSource source) {
-            var encoder = new PngBitmapEncoder();
-            var memoryStream = new MemoryStream();
-            var image = new BitmapImage();
-
-            encoder.Frames.Add(BitmapFrame.Create(source));
-            encoder.Save(memoryStream);
-
-
-
-            image.BeginInit();
-            image.StreamSource = new MemoryStream(memoryStream.ToArray());
-            image.EndInit();
-            memoryStream.Close();
-            return image;
-        }
+        
     }
 }

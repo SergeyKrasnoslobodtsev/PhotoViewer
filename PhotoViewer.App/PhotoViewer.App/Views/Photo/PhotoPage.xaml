@@ -3,26 +3,42 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:helpers="clr-namespace:PhotoViewer.App.Helpers"
-      xmlns:converter="clr-namespace:PhotoViewer.App.Converters"
+      xmlns:control="clr-namespace:PhotoViewer.App.Controls.SmoothPanel"
+      xmlns:vm="clr-namespace:PhotoViewer.App.ViewModel"
       xmlns:ui="http://schemas.modernwpf.com/2019"
       xmlns:local="clr-namespace:PhotoViewer.App.Views"
       mc:Ignorable="d" 
       DataContext="{Binding Photo, Source={StaticResource Locator}}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PhotoPage">
-
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/PhotoViewer.App;component/Styles/MiniatureStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+           
         </ResourceDictionary>
     </Page.Resources>
-
-    <ui:ItemsRepeaterScrollHost>
-        <ui:ScrollViewerEx>
-            <ui:ItemsRepeater ItemsSource="{Binding PreferenceGroups}" ItemTemplate="{StaticResource Groups}" ScrollViewer.CanContentScroll="True" Background="White"/>
-        </ui:ScrollViewerEx>
-    </ui:ItemsRepeaterScrollHost>
+    <DockPanel>
+        <ItemsControl ItemsSource="{Binding PreferenceGroups}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <ScrollViewer KeyboardNavigation.IsTabStop="True" CanContentScroll="True">
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <control:SmoothPanel>
+                        <control:SmoothPanel.Templates>
+                            <control:SmoothPanelTemplate View="{x:Type local:GroupsThumbnail}" ViewModel="{x:Type vm:PreferenceGroup}" />
+                        </control:SmoothPanel.Templates>
+                    </control:SmoothPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </DockPanel>
 </Page>

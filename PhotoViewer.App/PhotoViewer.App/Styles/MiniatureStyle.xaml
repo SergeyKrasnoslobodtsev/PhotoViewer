@@ -2,10 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:PhotoViewer.App.Styles" 
                     xmlns:converter="clr-namespace:PhotoViewer.App.Converters"
-                    xmlns:ui="http://schemas.modernwpf.com/2019">
+                     xmlns:vm="clr-namespace:PhotoViewer.App.ViewModel"
+                    xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:mvvm="http://www.galasoft.ch/mvvmlight">
 
     <converter:UriToImageConverter x:Key="UriToImageConverter"/>
     <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <converter:DateToStringConverters x:Key="DateToStringConverters"/>
     <Style x:Key="ItemCircleButton" TargetType="ToggleButton">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -71,7 +73,8 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-    <ui:FlowLayout x:Key="ItemPanel"/>
+    
+    <ui:NonVirtualizingLayout x:Key="ItemPanel"/>
     <DataTemplate x:Key="Itemstyle" DataType="local:CategoryItem">
         <Grid >
             <Grid.RowDefinitions>
@@ -94,13 +97,24 @@
             <ToggleButton x:Name="tg_item" Opacity="10" Style="{StaticResource ItemCircleButton}"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="Groups" DataType="local:PreferenceGroup">
-        <StackPanel x:Name="stack" Margin="5">
-            <StackPanel x:Name="stack2" Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <ToggleButton x:Name="tg_group" Style="{StaticResource GroupCircleButton}" Margin="10 0"/>
-                <TextBlock Style="{StaticResource BaseTextBlockStyle}" Margin="0,8,0,5" Text="{Binding Name}"/>
-            </StackPanel>
-            <ui:ItemsRepeater ItemsSource="{Binding Preferences}" ItemTemplate="{StaticResource Itemstyle}" Layout="{StaticResource ItemPanel}" Background="White"/>
-        </StackPanel>
+    
+    <DataTemplate x:Key="Groups">
+        <Grid x:Name="stack" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ToggleButton x:Name="tg_group" Style="{StaticResource GroupCircleButton}" Margin="10 0"/>
+            <TextBlock Grid.Column="1" Style="{StaticResource BaseTextBlockStyle}" Margin="0,8,0,5" Text="{Binding Name, Converter={StaticResource DateToStringConverters}}"/>
+            <ui:ItemsRepeater x:Name="panel" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding Preferences}" ItemTemplate="{StaticResource Itemstyle}" Background="White">
+                <ui:ItemsRepeater.Layout>
+                    <ui:FlowLayout/>
+                </ui:ItemsRepeater.Layout>
+            </ui:ItemsRepeater>
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>

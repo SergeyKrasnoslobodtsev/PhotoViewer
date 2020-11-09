@@ -50,6 +50,12 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack.Core.1.1.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack.Shell.1.1.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="ModernWpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ModernWpfUI.0.9.2\lib\net45\ModernWpf.dll</HintPath>
     </Reference>
@@ -92,17 +98,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\SmoothPanel\DataBindHelper.cs" />
+    <Compile Include="Controls\SmoothPanel\IHeightMeasurer.cs" />
+    <Compile Include="Controls\SmoothPanel\SmoothPanel.cs" />
+    <Compile Include="Controls\SmoothPanel\SmoothPanelChildren.cs" />
+    <Compile Include="Controls\SmoothPanel\SmoothPanelMeasurer.cs" />
+    <Compile Include="Controls\SmoothPanel\SmoothPanelTemplate.cs" />
+    <Compile Include="Controls\SmoothPanel\SmoothPanelViewCache.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\DateToStringConverters.cs" />
     <Compile Include="Converters\UriToImageConverter.cs" />
     <Compile Include="Helpers\DriveEx.cs" />
     <Compile Include="Helpers\FileData.cs" />
     <Compile Include="Helpers\IconHelpers.cs" />
+    <Compile Include="Helpers\ImageHelpers.cs" />
     <Compile Include="Model\Photo.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\Navigation\INavigationServiceEx.cs" />
     <Compile Include="Services\Navigation\NavigationServiceEx.cs" />
     <Compile Include="Services\Navigation\Pages.cs" />
+    <Compile Include="Utils\ImageMeasurer.cs" />
     <Compile Include="ViewModel\Album\AlbumViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Maps\MapsViewModel.cs" />
@@ -116,6 +132,9 @@
     </Compile>
     <Compile Include="Views\Photo\PhotoPage.xaml.cs">
       <DependentUpon>PhotoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Photo\GroupsThumbnail.xaml.cs">
+      <DependentUpon>GroupsThumbnail.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -146,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Photo\PhotoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Photo\GroupsThumbnail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
