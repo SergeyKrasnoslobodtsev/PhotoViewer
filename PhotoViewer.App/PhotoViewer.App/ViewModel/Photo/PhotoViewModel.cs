@@ -17,9 +17,16 @@ namespace PhotoViewer.App.ViewModel
     {
         public ObservableCollection<PreferenceGroup> PreferenceGroups { get; private set; }
         public ObservableCollection<string> Items => new ObservableCollection<string>(_dataService.GetPhoto().Select(p => p.Path));
-        private object _selected;
-        public object SelectedItem { get { return _selected; } set { Set(ref _selected, value); } }
-
+        private Photo _selected;
+        public Photo SelectedItem {
+            get { return _selected; }
+            set {
+                Set(ref _selected, value);
+                RaisePropertyChanged(nameof(SelectedItem));
+                Trace.WriteLine(SelectedItem);
+            }
+        }
+        public RelayCommand<object> SelectedItemChangedCommand { get; set; }
         protected readonly IDataService _dataService;
 
         public RelayCommand<object> SelectedCommand => new RelayCommand<object>(Selected);
@@ -28,12 +35,14 @@ namespace PhotoViewer.App.ViewModel
         {
             _dataService = dataService;
             PreferenceGroups = new ObservableCollection<PreferenceGroup>();
-
+            SelectedItemChangedCommand = new RelayCommand<object>((selectedItem) => {
+                Trace.WriteLine(SelectedItem.Path);
+            });
             foreach (var items in _dataService.GetPhoto().GroupBy(p => p.CreationTime))
             {
-                var item = new PreferenceGroup() { Name = items.Key, SelectionMode = 1 };
+                var item = new PreferenceGroup() { Name = items.Key };
                 foreach (var i in items)
-                    item.Preferences.Add(i);
+                    item.Preferences.Add(new ViewModel.Items() { file = i.Path, IsSelectedItem = false});
                 PreferenceGroups.Add(item);
             }
         }
@@ -46,31 +55,40 @@ namespace PhotoViewer.App.ViewModel
         }
     }
 
-    public class PreferenceGroup : IHeightMeasurer
+    public class PreferenceGroup : ViewModelBase, IHeightMeasurer
     {
         private double _estimatedHeight = -1;
 
         private double _estimatedWidth;
 
-        public string Name { get; set; }
-        public int SelectionMode { get; set; }
 
-        public ObservableCollection<Photo> Preferences { get; private set; }
+        public string Name { get; set; }
+        public bool IsSelectedGroup { get; set; }
+
+        public ObservableCollection<Items> Preferences { get; private set; }
+
+        
 
         public PreferenceGroup()
         {
-            Preferences = new ObservableCollection<Photo>();
+            Preferences = new ObservableCollection<Items>();
+            
         }
         public double GetEstimatedHeight(double availableWidth)
         {
-            // Do not recalc height if text and width are unchanged
             if (_estimatedHeight < 0 || _estimatedWidth != availableWidth)
             {
                 _estimatedWidth = availableWidth;
-                _estimatedHeight = ImageMeasurer.GetEstimatedHeight(Preferences.Select(p => p.Path), availableWidth) + 20; // Add margin
+                _estimatedHeight = ImageMeasurer.GetEstimatedHeight(Preferences.Select(p => p.file), availableWidth) + 20; // Add margin
             }
             return _estimatedHeight;
         }
+    }
+
+    public class Items
+    {
+        public string file { get; set; }
+        public bool IsSelectedItem { get; set; }
     }
 
 }

@@ -19,7 +19,7 @@ namespace PhotoViewer.App.Services
     public class DataService : IDataService
     {
         public Task<IEnumerable<FileData>> GetFileInfo() {
-            return Task.Run(()=> FastDirectoryEnumerator.EnumerateFiles(@"C:\Users\Админ\Documents\Файлики", "*.jpg", SearchOption.AllDirectories));
+            return Task.Run(()=> FastDirectoryEnumerator.EnumerateFiles(@"E:\", "*.jpg", SearchOption.AllDirectories));
         }
         public IEnumerable<Photo> GetPhoto()
         {
@@ -31,10 +31,7 @@ namespace PhotoViewer.App.Services
                     Path = item.Path,
                     CreationTime = Convert.ToDateTime(file.Properties.System.ItemDate.Value).ToString("d")
 
-                });
-                
-                
-                Trace.WriteLine(Convert.ToDateTime(file.Properties.System.ItemDate.Value).ToString("d"));           
+                });      
             }
 
             return photo;

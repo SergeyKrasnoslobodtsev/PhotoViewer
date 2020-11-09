@@ -467,3 +467,7 @@ C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\PhotoViewer.App.csprojAssemblyReference.cache
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.dll
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.dll
+D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\Views\Photo\GroupsThumbnail.g.cs
+D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\Views\Photo\GroupsThumbnail.baml

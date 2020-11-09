@@ -26,7 +26,7 @@
             <ItemsControl.Template>
                 <ControlTemplate>
                     <ScrollViewer KeyboardNavigation.IsTabStop="True" CanContentScroll="True">
-                        <ItemsPresenter />
+                        <ItemsPresenter SnapsToDevicePixels="True" />
                     </ScrollViewer>
                 </ControlTemplate>
             </ItemsControl.Template>

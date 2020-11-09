@@ -20,10 +20,11 @@ namespace PhotoViewer.App.Utils
             foreach (var img in source)
             {
                 CheckInitialization(img);
-                widthItems += _charWidth + 20;
+                var v = widthItems + _charWidth;
+                widthItems = v + 20;
             }
             height = widthItems / width;
-            return height;
+            return height*400;
         }
 
         private static void CheckInitialization(string img)
