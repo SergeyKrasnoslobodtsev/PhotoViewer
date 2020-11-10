@@ -16,6 +16,7 @@ namespace PhotoViewer.App.Helpers
                 bi.BeginInit();
                 bi.DecodePixelHeight = 400;
                 bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
                 bi.StreamSource = stream;
                 bi.EndInit();
                 bi.Freeze();

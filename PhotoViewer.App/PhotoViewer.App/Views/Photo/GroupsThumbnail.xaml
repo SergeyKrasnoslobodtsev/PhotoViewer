@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="PhotoViewer.App.Views.GroupsThumbnail"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PhotoViewer.App.ViewModel" 
-             xmlns:ui="clr-namespace:ModernWpf.Controls;assembly=ModernWpf.Controls"
+             xmlns:local="clr-namespace:PhotoViewer.App.Views" 
+             xmlns:ui="http://schemas.modernwpf.com/2019" x:Class="PhotoViewer.App.Views.GroupsThumbnail"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -12,13 +12,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/PhotoViewer.App;component/Styles/MiniatureStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <CollectionViewSource x:Key="source" Source="{Binding Items}">
-                <CollectionViewSource.GroupDescriptions>
-                    <PropertyGroupDescription PropertyName="CreationTime"/>
-                </CollectionViewSource.GroupDescriptions>
-            </CollectionViewSource>
         </ResourceDictionary>
     </UserControl.Resources>
+    
     <Grid x:Name="stack" Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -30,61 +26,13 @@
         </Grid.RowDefinitions>
         <ToggleButton x:Name="tg_group" Style="{StaticResource GroupCircleButton}" Margin="10 0"/>
         <TextBlock Grid.Column="1" Style="{StaticResource BaseTextBlockStyle}" Margin="0,8,0,5" Text="{Binding Name, Converter={StaticResource DateToStringConverters}}"/>
-        <ListView x:Name="panel" Grid.ColumnSpan="2" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Preferences}" Background="White">
-            <ListView.Resources>
-                <ControlTemplate x:Key="SelectedTemplate" TargetType="ListViewItem">
-                    <Border SnapsToDevicePixels="true" 
-                    BorderBrush="{TemplateBinding BorderBrush}" 
-                    BorderThickness="{TemplateBinding BorderThickness}" 
-                    Background="{TemplateBinding Background}"
-                    CornerRadius="5" x:Name="border">
-                        <ContentControl 
-                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                    Margin="2,2,2,2" 
-                    VerticalAlignment="Stretch"
-                    Content="{TemplateBinding Content}" />
-                    </Border>
-                </ControlTemplate>
-                <Style TargetType="ListViewItem">
-                    <Style.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsSelected" Value="true" />
-                                <Condition Property="Selector.IsSelectionActive" Value="true" />
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="Red" />
-                            <Setter Property="Template" Value="{StaticResource SelectedTemplate}" />
-                        </MultiTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ListView.Resources>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Image Height="200" Grid.RowSpan="2" Source="{Binding file, Converter={StaticResource UriToImageConverter}, IsAsync=True}">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding ElementName=tg_item, Path=IsChecked}" Value="True">
-                                            <Setter Property="Margin" Value="20"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                        <ToggleButton x:Name="tg_item"  Opacity="10" IsChecked="{Binding IsSelectedItem}" Style="{StaticResource ItemCircleButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
+        <ListView Grid.ColumnSpan="2" Grid.Row="1" 
+                  ItemsPanel="{StaticResource panel}" 
+                  ItemsSource="{Binding Preferences}" 
+                  ItemTemplate="{StaticResource itemstyle}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  BorderThickness="0" 
+                  Style="{DynamicResource ListViewStyle}">
         </ListView>
     </Grid>
 </UserControl>

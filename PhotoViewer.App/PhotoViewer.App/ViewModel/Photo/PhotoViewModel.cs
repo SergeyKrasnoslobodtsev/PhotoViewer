@@ -16,33 +16,34 @@ namespace PhotoViewer.App.ViewModel
     public class PhotoViewModel : ViewModelBase
     {
         public ObservableCollection<PreferenceGroup> PreferenceGroups { get; private set; }
-        public ObservableCollection<string> Items => new ObservableCollection<string>(_dataService.GetPhoto().Select(p => p.Path));
-        private Photo _selected;
-        public Photo SelectedItem {
+
+
+
+
+        private Items _selected;
+        public Items SelectedItem {
             get { return _selected; }
             set {
                 Set(ref _selected, value);
                 RaisePropertyChanged(nameof(SelectedItem));
-                Trace.WriteLine(SelectedItem);
+
             }
         }
-        public RelayCommand<object> SelectedItemChangedCommand { get; set; }
+
         protected readonly IDataService _dataService;
 
-        public RelayCommand<object> SelectedCommand => new RelayCommand<object>(Selected);
+
 
         public PhotoViewModel(IDataService dataService)
         {
             _dataService = dataService;
             PreferenceGroups = new ObservableCollection<PreferenceGroup>();
-            SelectedItemChangedCommand = new RelayCommand<object>((selectedItem) => {
-                Trace.WriteLine(SelectedItem.Path);
-            });
+
             foreach (var items in _dataService.GetPhoto().GroupBy(p => p.CreationTime))
             {
-                var item = new PreferenceGroup() { Name = items.Key };
+                var item = new PreferenceGroup() { Name = items.Key, IsSelectedGroup = false };
                 foreach (var i in items)
-                    item.Preferences.Add(new ViewModel.Items() { file = i.Path, IsSelectedItem = false});
+                    item.Preferences.Add(new Items() { file = i.Path, IsSelectedItem = false});
                 PreferenceGroups.Add(item);
             }
         }
@@ -72,6 +73,7 @@ namespace PhotoViewer.App.ViewModel
         public PreferenceGroup()
         {
             Preferences = new ObservableCollection<Items>();
+
             
         }
         public double GetEstimatedHeight(double availableWidth)
@@ -79,7 +81,7 @@ namespace PhotoViewer.App.ViewModel
             if (_estimatedHeight < 0 || _estimatedWidth != availableWidth)
             {
                 _estimatedWidth = availableWidth;
-                _estimatedHeight = ImageMeasurer.GetEstimatedHeight(Preferences.Select(p => p.file), availableWidth) + 20; // Add margin
+                _estimatedHeight = ImageMeasurer.GetEstimatedHeight(Preferences.Select(p => p.file), availableWidth) + 20;
             }
             return _estimatedHeight;
         }

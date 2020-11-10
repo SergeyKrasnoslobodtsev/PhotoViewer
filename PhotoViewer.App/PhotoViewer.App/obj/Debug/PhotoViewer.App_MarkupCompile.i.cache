@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\
+C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\
 PhotoViewer.App
 none
 false
 DEBUG;TRACE
-D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\App.xaml
+C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\App.xaml
 7-392585734
 
-361223502428
-134918880781
+38569132557
+134-903160
 MainWindow.xaml;Styles\Icons.xaml;Styles\MiniatureStyle.xaml;Views\Album\AlbumPage.xaml;Views\Maps\MapsPage.xaml;Views\Photo\PhotoPage.xaml;Views\Photo\GroupsThumbnail.xaml;
 
 True

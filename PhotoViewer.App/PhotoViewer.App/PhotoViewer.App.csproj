@@ -107,6 +107,8 @@
     <Compile Include="Controls\SmoothPanel\SmoothPanelViewCache.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\DateToStringConverters.cs" />
+    <Compile Include="Converters\ItemCollectionToBooleanConverter.cs" />
+    <Compile Include="Converters\MultiConverter.cs" />
     <Compile Include="Converters\UriToImageConverter.cs" />
     <Compile Include="Helpers\DriveEx.cs" />
     <Compile Include="Helpers\FileData.cs" />
