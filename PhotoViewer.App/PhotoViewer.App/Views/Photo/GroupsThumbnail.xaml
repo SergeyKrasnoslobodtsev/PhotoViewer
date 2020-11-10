@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PhotoViewer.App.Views" 
-             xmlns:ui="http://schemas.modernwpf.com/2019" x:Class="PhotoViewer.App.Views.GroupsThumbnail"
+             xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="PhotoViewer.App.Views.GroupsThumbnail"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -24,15 +24,9 @@
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ToggleButton x:Name="tg_group" Style="{StaticResource GroupCircleButton}" Margin="10 0"/>
+        <ToggleButton x:Name="tg_group" Style="{StaticResource GroupCircleButton}" Margin="10 0" Checked="tg_group_Checked" Unchecked="tg_group_Unchecked"/>
+
         <TextBlock Grid.Column="1" Style="{StaticResource BaseTextBlockStyle}" Margin="0,8,0,5" Text="{Binding Name, Converter={StaticResource DateToStringConverters}}"/>
-        <ListView Grid.ColumnSpan="2" Grid.Row="1" 
-                  ItemsPanel="{StaticResource panel}" 
-                  ItemsSource="{Binding Preferences}" 
-                  ItemTemplate="{StaticResource itemstyle}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                  BorderThickness="0" 
-                  Style="{DynamicResource ListViewStyle}">
-        </ListView>
+        <ListView SelectionChanged="list_SelectionChanged" x:Name="list" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding Preferences, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ListViewStyle}"/>
     </Grid>
 </UserControl>

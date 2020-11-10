@@ -9,30 +9,25 @@ using System.Windows.Data;
 
 namespace PhotoViewer.App.Converters
 {
-    public class ItemCollectionToBooleanConverter : IMultiValueConverter
+    public class ItemCollectionToBooleanConverter : IValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            IEnumerable<Items> items = values[0] as IEnumerable<Items>;
-
-            if (items.Any())
-            {
-
-                int selectedCountries = items.Where(c => c.IsSelectedItem).Count();
-
-                //if (selectedCountries.Equals(countriesOnTheCurrentContinent.Count()))
-                //    return true;
-
-                if (selectedCountries > 0)
-                    return null;
-            }
-
+        private IEnumerable<Items> items;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            items = value as IEnumerable<Items>;
+            if(items != null)
+                return items.Select(p => p.IsSelectedItem).Contains(true);
             return false;
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+
+                foreach(var item in items) {
+                if ((bool)value)
+                    item.IsSelectedItem = true;
+                else
+                    item.IsSelectedItem = false;
+            }
+            return items;
         }
     }
 }

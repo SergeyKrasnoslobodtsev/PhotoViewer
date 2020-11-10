@@ -5,40 +5,47 @@ using PhotoViewer.App.Model;
 using PhotoViewer.App.Services;
 using PhotoViewer.App.Utils;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Windows;
+using System.Windows.Media;
 using System.Windows.Navigation;
 
 namespace PhotoViewer.App.ViewModel
 {
     public class PhotoViewModel : ViewModelBase
     {
-        public ObservableCollection<PreferenceGroup> PreferenceGroups { get; private set; }
+        private ObservableCollection<PreferenceGroup> preferenceGroups;
+        public ObservableCollection<PreferenceGroup> PreferenceGroups {
+            get { return preferenceGroups; }
+            set {
+                Set(ref preferenceGroups, value);
+                RaisePropertyChanged(nameof(PreferenceGroups));
 
+            }
+        }
 
-
-
-        private Items _selected;
-        public Items SelectedItem {
+        private PreferenceGroup _selected;
+        public PreferenceGroup Selected {
             get { return _selected; }
             set {
                 Set(ref _selected, value);
-                RaisePropertyChanged(nameof(SelectedItem));
+                RaisePropertyChanged(nameof(Selected));
 
             }
         }
 
         protected readonly IDataService _dataService;
 
-
-
         public PhotoViewModel(IDataService dataService)
         {
             _dataService = dataService;
             PreferenceGroups = new ObservableCollection<PreferenceGroup>();
-
             foreach (var items in _dataService.GetPhoto().GroupBy(p => p.CreationTime))
             {
                 var item = new PreferenceGroup() { Name = items.Key, IsSelectedGroup = false };
@@ -48,14 +55,10 @@ namespace PhotoViewer.App.ViewModel
             }
         }
 
-        public void Selected(object item)
-        {
-            var photo = item as Photo;
-            Trace.WriteLine(SelectedItem); 
-            Trace.WriteLine(photo.Path);
-        }
+        
     }
 
+   
     public class PreferenceGroup : ViewModelBase, IHeightMeasurer
     {
         private double _estimatedHeight = -1;
@@ -64,16 +67,14 @@ namespace PhotoViewer.App.ViewModel
 
 
         public string Name { get; set; }
+
         public bool IsSelectedGroup { get; set; }
+        public ObservableCollection<Items> Preferences { get; set; }
 
-        public ObservableCollection<Items> Preferences { get; private set; }
-
-        
 
         public PreferenceGroup()
         {
             Preferences = new ObservableCollection<Items>();
-
             
         }
         public double GetEstimatedHeight(double availableWidth)
@@ -91,6 +92,7 @@ namespace PhotoViewer.App.ViewModel
     {
         public string file { get; set; }
         public bool IsSelectedItem { get; set; }
+
     }
 
 }

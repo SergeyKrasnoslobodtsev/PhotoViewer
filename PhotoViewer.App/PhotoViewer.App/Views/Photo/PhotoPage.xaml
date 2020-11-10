@@ -21,13 +21,10 @@
                     <ItemsPresenter SnapsToDevicePixels="True" />
                 </ScrollViewer>
             </ControlTemplate>
-
         </ResourceDictionary>
     </Page.Resources>
     <DockPanel>
-        <ItemsControl ItemsSource="{Binding PreferenceGroups}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto" Template="{DynamicResource ItemsControlControlTemplate1}">
+        <ItemsControl ItemsSource="{Binding PreferenceGroups}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Template="{DynamicResource ItemsControlControlTemplate1}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <control:SmoothPanel>
