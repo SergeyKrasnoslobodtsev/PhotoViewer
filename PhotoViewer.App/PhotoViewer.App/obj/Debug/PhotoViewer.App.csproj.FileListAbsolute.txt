@@ -306,6 +306,10 @@ D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\PhotoViewer.Ap
 D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\PhotoViewer.App.csproj.CoreCompileInputs.cache
 D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\PhotoViewer.App.csproj.CopyComplete
 D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\PhotoViewer.App.csprojAssemblyReference.cache
+D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.dll
+D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\Views\Photo\GroupsThumbnail.g.cs
+D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\Views\Photo\GroupsThumbnail.baml
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\PhotoViewer.App.exe.config
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\PhotoViewer.App.exe
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\PhotoViewer.App.pdb
@@ -408,6 +412,8 @@ C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\GalaSoft.MvvmLight.dll
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\GalaSoft.MvvmLight.Extras.dll
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\ModernWpf.Controls.dll
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\ModernWpf.dll
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
@@ -464,10 +470,4 @@ C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\PhotoViewer.App.csproj.CopyComplete
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\PhotoViewer.App.exe
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\PhotoViewer.App.pdb
-C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.dll
-C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
-D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.dll
-D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
-D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\Views\Photo\GroupsThumbnail.g.cs
-D:\Projects\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\Views\Photo\GroupsThumbnail.baml
 C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\PhotoViewer.App.csprojAssemblyReference.cache

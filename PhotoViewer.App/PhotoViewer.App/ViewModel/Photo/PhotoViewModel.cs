@@ -20,16 +20,8 @@ namespace PhotoViewer.App.ViewModel
 {
     public class PhotoViewModel : ViewModelBase
     {
-        private ObservableCollection<PreferenceGroup> preferenceGroups;
-        public ObservableCollection<PreferenceGroup> PreferenceGroups {
-            get { return preferenceGroups; }
-            set {
-                Set(ref preferenceGroups, value);
-                RaisePropertyChanged(nameof(PreferenceGroups));
-
-            }
-        }
-
+        public ObservableCollection<PreferenceGroup> PreferenceGroups { get; private set; }
+        public ObservableCollection<SearchText> searchTexts { get; private set; }
         private PreferenceGroup _selected;
         public PreferenceGroup Selected {
             get { return _selected; }
@@ -46,6 +38,11 @@ namespace PhotoViewer.App.ViewModel
         {
             _dataService = dataService;
             PreferenceGroups = new ObservableCollection<PreferenceGroup>();
+            searchTexts = new ObservableCollection<SearchText>() { 
+                new SearchText() { text = "День рождения" }, 
+                new SearchText() { text = "Документ" }, 
+                new SearchText() { text = "Казань" }, 
+                new SearchText() { text = "Скриншоты" }, };
             foreach (var items in _dataService.GetPhoto().GroupBy(p => p.CreationTime))
             {
                 var item = new PreferenceGroup() { Name = items.Key, IsSelectedGroup = false };
@@ -95,4 +92,14 @@ namespace PhotoViewer.App.ViewModel
 
     }
 
+
+    public class SearchText
+    {
+        public string text { get; set; }
+    }
+
+    public class SearchFace
+    {
+        public string image { get; set; }
+    }
 }

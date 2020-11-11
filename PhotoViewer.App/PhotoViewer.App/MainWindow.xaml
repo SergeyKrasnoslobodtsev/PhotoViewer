@@ -13,7 +13,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
     <Grid>
-        <ui:NavigationView x:Name="Nav" OpenPaneLength="200" OverflowLabelMode="NoLabel" IsBackButtonVisible="Collapsed" PaneDisplayMode="Left" SelectionChanged="Nav_SelectionChanged" >
+        <ui:NavigationView x:Name="Nav" PaneDisplayMode="Left" IsTitleBarAutoPaddingEnabled="True" OpenPaneLength="200" OverflowLabelMode="MoreLabel" IsBackButtonVisible="Collapsed" SelectionChanged="Nav_SelectionChanged" >
             <ui:NavigationView.PaneHeader>
                 <ui:SimpleStackPanel Orientation="Horizontal">
                     <Image Width="40" Source="/PhotoViewer.App;component/Images/Logo.png"/>
@@ -71,6 +71,9 @@
                     </ui:NavigationViewItem.Template>
                 </ui:NavigationViewItem>
             </ui:NavigationView.MenuItems>
+            <ui:NavigationView.PaneFooter>
+                <ui:AppBarButton Content="test"/>
+            </ui:NavigationView.PaneFooter>
             <ui:Frame  x:Name="content" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden" Source="/PhotoViewer.App;component/Views/Photo/PhotoPage.xaml" />
         </ui:NavigationView>
     </Grid>

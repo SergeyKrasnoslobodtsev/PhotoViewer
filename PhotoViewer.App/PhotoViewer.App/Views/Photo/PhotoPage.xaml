@@ -21,9 +21,91 @@
                     <ItemsPresenter SnapsToDevicePixels="True" />
                 </ScrollViewer>
             </ControlTemplate>
+            <Style x:Key="AutoSuggestBoxStyle" TargetType="{x:Type ui:AutoSuggestBox}">
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextControlForeground}"/>
+                <Setter Property="Background" Value="{DynamicResource TextControlBackground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource TextControlBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}"/>
+                <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+                <Setter Property="TextBoxStyle" Value="{DynamicResource AutoSuggestBoxTextBoxStyle}"/>
+                <Setter Property="UseSystemFocusVisuals" Value="{DynamicResource IsApplicationFocusVisualKindReveal}"/>
+                <Setter Property="FocusVisualStyle" Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}"/>
+                <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+                <Setter Property="ItemContainerStyle" Value="{DynamicResource {x:Type ListViewItem}}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ui:AutoSuggestBox}">
+                            <Grid x:Name="LayoutRoot">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBox x:Name="TextBox" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" ui:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}" ui:ControlHelper.Description="{TemplateBinding Description}" Foreground="{TemplateBinding Foreground}" FontWeight="{TemplateBinding FontWeight}" FocusVisualStyle="{TemplateBinding FocusVisualStyle}" FontStretch="{TemplateBinding FontStretch}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" ui:ControlHelper.Header="{TemplateBinding Header}" Margin="0" ui:ControlHelper.PlaceholderText="{TemplateBinding PlaceholderText}" Style="{TemplateBinding TextBoxStyle}" ui:FocusVisualHelper.UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}" Width="{TemplateBinding Width}" Panel.ZIndex="0"/>
+                                <Popup x:Name="SuggestionsPopup" AllowsTransparency="True" IsOpen="True" Placement="Bottom">
+                                    <StackPanel Margin="{DynamicResource AutoSuggestListPadding}">
+                                        <ui:ThemeShadowChrome CornerRadius="{Binding CornerRadius, ElementName=SuggestionsContainer}" IsShadowEnabled="{DynamicResource {x:Static SystemParameters.DropShadowKey}}" MaxHeight="{TemplateBinding MaxSuggestionListHeight}" Width="{TemplateBinding ActualWidth}">
+                                            <Border x:Name="SuggestionsContainer" BorderBrush="{DynamicResource AutoSuggestBoxSuggestionsListBorderBrush}" BorderThickness="{DynamicResource AutoSuggestListBorderThemeThickness}" Background="{DynamicResource AutoSuggestBoxSuggestionsListBackground}" CornerRadius="{DynamicResource OverlayCornerRadius}" Padding="{DynamicResource AutoSuggestListMargin}">
+                                                <ui:AutoSuggestBoxListView ItemsSource="{Binding searchTexts}" x:Name="SuggestionsList" DisplayMemberPath="{TemplateBinding DisplayMemberPath}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsItemClickEnabled="True" ItemContainerStyle="{TemplateBinding ItemContainerStyle}" MaxHeight="{DynamicResource AutoSuggestListMaxHeight}" Style="{DynamicResource {x:Type ListView}}" SelectedValuePath="{TemplateBinding TextMemberPath}">
+                                                    <ui:AutoSuggestBoxListView.ItemTemplate>
+                                                        <DataTemplate DataType="{x:Type vm:SearchText}">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <ui:PathIcon Data="{StaticResource search}"/>
+                                                                <TextBlock Margin="5 0" VerticalAlignment="Center" Text="{Binding text}"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ui:AutoSuggestBoxListView.ItemTemplate>
+                                                </ui:AutoSuggestBoxListView>
+                                            </Border>
+                                        </ui:ThemeShadowChrome>
+                                        
+                                        <ui:ThemeShadowChrome CornerRadius="{Binding CornerRadius, ElementName=SuggestionsContainer2}" IsShadowEnabled="{DynamicResource {x:Static SystemParameters.DropShadowKey}}" MaxHeight="{TemplateBinding MaxSuggestionListHeight}" Width="{TemplateBinding ActualWidth}">
+                                            <Border Margin="0 5"  x:Name="SuggestionsContainer2" BorderBrush="{DynamicResource AutoSuggestBoxSuggestionsListBorderBrush}" BorderThickness="{DynamicResource AutoSuggestListBorderThemeThickness}" Background="{DynamicResource AutoSuggestBoxSuggestionsListBackground}" CornerRadius="{DynamicResource OverlayCornerRadius}" Padding="{DynamicResource AutoSuggestListMargin}">
+                                                <ui:AutoSuggestBoxListView ItemsSource="{Binding searchTexts}" x:Name="SuggestionsList2" DisplayMemberPath="{TemplateBinding DisplayMemberPath}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"  IsItemClickEnabled="True" ItemContainerStyle="{TemplateBinding ItemContainerStyle}" MaxHeight="{DynamicResource AutoSuggestListMaxHeight}" Style="{DynamicResource {x:Type ListView}}" SelectedValuePath="{TemplateBinding TextMemberPath}">
+                                                    <ui:AutoSuggestBoxListView.ItemTemplate>
+                                                        <DataTemplate DataType="{x:Type vm:SearchText}">
+                                                            <ToggleButton Width="24" Height="24" Style="{StaticResource Circle}">
+                                                                <Image Source="/PhotoViewer.App;component/Images/Logo.png"/>
+                                                            </ToggleButton>
+                                                        </DataTemplate>
+                                                    </ui:AutoSuggestBoxListView.ItemTemplate>
+                                                    <ui:AutoSuggestBoxListView.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <StackPanel Orientation="Horizontal"/>
+                                                        </ItemsPanelTemplate>
+                                                    </ui:AutoSuggestBoxListView.ItemsPanel>
+                                                </ui:AutoSuggestBoxListView>
+                                            </Border>
+                                        </ui:ThemeShadowChrome>
+                                    </StackPanel>
+                                </Popup>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Page.Resources>
     <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <ui:AutoSuggestBox PlaceholderText="Поиск фото" QueryIcon="Find" Width="500" VerticalAlignment="Center" Style="{DynamicResource AutoSuggestBoxStyle}"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <ui:AppBarButton  Label="Загрузить">
+                    <ui:AppBarButton.Icon>
+                        <ui:PathIcon Data="{StaticResource loadimage}" />
+                    </ui:AppBarButton.Icon>
+                </ui:AppBarButton>
+            </StackPanel>
+
+        </Grid>
         <ItemsControl ItemsSource="{Binding PreferenceGroups}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Template="{DynamicResource ItemsControlControlTemplate1}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
