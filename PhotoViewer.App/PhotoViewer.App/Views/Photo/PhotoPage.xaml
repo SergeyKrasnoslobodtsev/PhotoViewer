@@ -84,6 +84,26 @@
                                     </StackPanel>
                                 </Popup>
                             </Grid>
+                            <ControlTemplate.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.GotKeyboardFocus" SourceName="TextBox">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="SuggestionsPopup" Storyboard.TargetProperty="(Popup.IsOpen)">
+                                                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
+                                            </BooleanAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="SuggestionsPopup">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="SuggestionsPopup" Storyboard.TargetProperty="(Popup.IsOpen)">
+                                                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
+                                            </BooleanAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
