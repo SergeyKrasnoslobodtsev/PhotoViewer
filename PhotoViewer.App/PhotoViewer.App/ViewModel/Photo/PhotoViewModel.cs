@@ -21,7 +21,11 @@ namespace PhotoViewer.App.ViewModel
     public class PhotoViewModel : ViewModelBase
     {
         public ObservableCollection<PreferenceGroup> PreferenceGroups { get; private set; }
+
         public ObservableCollection<SearchText> searchTexts { get; private set; }
+
+        public ObservableCollection<SearchLoacation> searchLoacations { get; private set; }
+
         private PreferenceGroup _selected;
         public PreferenceGroup Selected {
             get { return _selected; }
@@ -38,11 +42,19 @@ namespace PhotoViewer.App.ViewModel
         {
             _dataService = dataService;
             PreferenceGroups = new ObservableCollection<PreferenceGroup>();
-            searchTexts = new ObservableCollection<SearchText>() { 
-                new SearchText() { text = "День рождения" }, 
-                new SearchText() { text = "Документ" }, 
-                new SearchText() { text = "Казань" }, 
-                new SearchText() { text = "Скриншоты" }, };
+
+            searchTexts = new ObservableCollection<SearchText> { 
+                new SearchText { text = "День рождения" }, 
+                new SearchText { text = "Документ" }, 
+                new SearchText { text = "Селфи" }, 
+                new SearchText { text = "Скриншоты" }
+            };
+            searchLoacations = new ObservableCollection<SearchLoacation> {
+                new SearchLoacation { text = "Москва" },
+                new SearchLoacation { text = "Казань" },
+                new SearchLoacation { text = "усово-тупик" },
+                new SearchLoacation { text = "Санкт-Петербург" }
+            };
             foreach (var items in _dataService.GetPhoto().GroupBy(p => p.CreationTime))
             {
                 var item = new PreferenceGroup() { Name = items.Key, IsSelectedGroup = false };
@@ -50,9 +62,7 @@ namespace PhotoViewer.App.ViewModel
                     item.Preferences.Add(new Items() { file = i.Path, IsSelectedItem = false});
                 PreferenceGroups.Add(item);
             }
-        }
-
-        
+        } 
     }
 
    
@@ -101,5 +111,9 @@ namespace PhotoViewer.App.ViewModel
     public class SearchFace
     {
         public string image { get; set; }
+    }
+    public class SearchLoacation
+    {
+        public string text { get; set; }
     }
 }

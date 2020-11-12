@@ -46,8 +46,8 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <TextBox x:Name="TextBox" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" ui:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}" ui:ControlHelper.Description="{TemplateBinding Description}" Foreground="{TemplateBinding Foreground}" FontWeight="{TemplateBinding FontWeight}" FocusVisualStyle="{TemplateBinding FocusVisualStyle}" FontStretch="{TemplateBinding FontStretch}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" ui:ControlHelper.Header="{TemplateBinding Header}" Margin="0" ui:ControlHelper.PlaceholderText="{TemplateBinding PlaceholderText}" Style="{TemplateBinding TextBoxStyle}" ui:FocusVisualHelper.UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}" Width="{TemplateBinding Width}" Panel.ZIndex="0"/>
-                                <Popup x:Name="SuggestionsPopup" AllowsTransparency="True" IsOpen="True" Placement="Bottom">
-                                    <StackPanel Margin="{DynamicResource AutoSuggestListPadding}">
+                                <Popup x:Name="SuggestionsPopup" AllowsTransparency="True" StaysOpen="False" Placement="Bottom">
+                                    <StackPanel Background="Transparent" Margin="{DynamicResource AutoSuggestListPadding}">
                                         <ui:ThemeShadowChrome CornerRadius="{Binding CornerRadius, ElementName=SuggestionsContainer}" IsShadowEnabled="{DynamicResource {x:Static SystemParameters.DropShadowKey}}" MaxHeight="{TemplateBinding MaxSuggestionListHeight}" Width="{TemplateBinding ActualWidth}">
                                             <Border x:Name="SuggestionsContainer" BorderBrush="{DynamicResource AutoSuggestBoxSuggestionsListBorderBrush}" BorderThickness="{DynamicResource AutoSuggestListBorderThemeThickness}" Background="{DynamicResource AutoSuggestBoxSuggestionsListBackground}" CornerRadius="{DynamicResource OverlayCornerRadius}" Padding="{DynamicResource AutoSuggestListMargin}">
                                                 <ui:AutoSuggestBoxListView ItemsSource="{Binding searchTexts}" x:Name="SuggestionsList" DisplayMemberPath="{TemplateBinding DisplayMemberPath}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsItemClickEnabled="True" ItemContainerStyle="{TemplateBinding ItemContainerStyle}" MaxHeight="{DynamicResource AutoSuggestListMaxHeight}" Style="{DynamicResource {x:Type ListView}}" SelectedValuePath="{TemplateBinding TextMemberPath}">
@@ -62,14 +62,27 @@
                                                 </ui:AutoSuggestBoxListView>
                                             </Border>
                                         </ui:ThemeShadowChrome>
-                                        
+
                                         <ui:ThemeShadowChrome CornerRadius="{Binding CornerRadius, ElementName=SuggestionsContainer2}" IsShadowEnabled="{DynamicResource {x:Static SystemParameters.DropShadowKey}}" MaxHeight="{TemplateBinding MaxSuggestionListHeight}" Width="{TemplateBinding ActualWidth}">
                                             <Border Margin="0 5"  x:Name="SuggestionsContainer2" BorderBrush="{DynamicResource AutoSuggestBoxSuggestionsListBorderBrush}" BorderThickness="{DynamicResource AutoSuggestListBorderThemeThickness}" Background="{DynamicResource AutoSuggestBoxSuggestionsListBackground}" CornerRadius="{DynamicResource OverlayCornerRadius}" Padding="{DynamicResource AutoSuggestListMargin}">
-                                                <ui:AutoSuggestBoxListView ItemsSource="{Binding searchTexts}" x:Name="SuggestionsList2" DisplayMemberPath="{TemplateBinding DisplayMemberPath}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"  IsItemClickEnabled="True" ItemContainerStyle="{TemplateBinding ItemContainerStyle}" MaxHeight="{DynamicResource AutoSuggestListMaxHeight}" Style="{DynamicResource {x:Type ListView}}" SelectedValuePath="{TemplateBinding TextMemberPath}">
+                                                <ui:AutoSuggestBoxListView Background="{DynamicResource AutoSuggestBoxSuggestionsListBackground}" BorderThickness="0" ItemsSource="{Binding searchTexts}" x:Name="SuggestionsList2" DisplayMemberPath="{TemplateBinding DisplayMemberPath}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"  IsItemClickEnabled="True" MaxHeight="{DynamicResource AutoSuggestListMaxHeight}" SelectedValuePath="{TemplateBinding TextMemberPath}">
+                                                    <ui:AutoSuggestBoxListView.ItemContainerStyle>
+                                                        <Style TargetType="{x:Type ui:AutoSuggestBoxListViewItem}">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="{x:Type ui:AutoSuggestBoxListViewItem}">
+                                                                        <Border Margin="5" CornerRadius="16">
+                                                                            <ContentPresenter/>
+                                                                        </Border>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </ui:AutoSuggestBoxListView.ItemContainerStyle>
                                                     <ui:AutoSuggestBoxListView.ItemTemplate>
                                                         <DataTemplate DataType="{x:Type vm:SearchText}">
-                                                            <ToggleButton Width="24" Height="24" Style="{StaticResource Circle}">
-                                                                <Image Source="/PhotoViewer.App;component/Images/Logo.png"/>
+                                                            <ToggleButton Width="32" Height="32" Style="{StaticResource Circle}">
+                                                                <Path Data="{StaticResource accaunt}" Fill="Gray" Stretch="Uniform"/>
                                                             </ToggleButton>
                                                         </DataTemplate>
                                                     </ui:AutoSuggestBoxListView.ItemTemplate>
@@ -81,11 +94,26 @@
                                                 </ui:AutoSuggestBoxListView>
                                             </Border>
                                         </ui:ThemeShadowChrome>
+
+                                        <ui:ThemeShadowChrome CornerRadius="{Binding CornerRadius, ElementName=SuggestionsContainer3}" IsShadowEnabled="{DynamicResource {x:Static SystemParameters.DropShadowKey}}" MaxHeight="{TemplateBinding MaxSuggestionListHeight}" Width="{TemplateBinding ActualWidth}">
+                                            <Border x:Name="SuggestionsContainer3" BorderBrush="{DynamicResource AutoSuggestBoxSuggestionsListBorderBrush}" BorderThickness="{DynamicResource AutoSuggestListBorderThemeThickness}" Background="{DynamicResource AutoSuggestBoxSuggestionsListBackground}" CornerRadius="{DynamicResource OverlayCornerRadius}" Padding="{DynamicResource AutoSuggestListMargin}">
+                                                <ui:AutoSuggestBoxListView ItemsSource="{Binding searchLoacations}" x:Name="SuggestionsList3" DisplayMemberPath="{TemplateBinding DisplayMemberPath}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsItemClickEnabled="True" ItemContainerStyle="{TemplateBinding ItemContainerStyle}" MaxHeight="{DynamicResource AutoSuggestListMaxHeight}" Style="{DynamicResource {x:Type ListView}}" SelectedValuePath="{TemplateBinding TextMemberPath}">
+                                                    <ui:AutoSuggestBoxListView.ItemTemplate>
+                                                        <DataTemplate DataType="{x:Type vm:SearchLoacation}">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <ui:PathIcon Data="{StaticResource location}"/>
+                                                                <TextBlock Margin="5 0" VerticalAlignment="Center" Text="{Binding text}"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ui:AutoSuggestBoxListView.ItemTemplate>
+                                                </ui:AutoSuggestBoxListView>
+                                            </Border>
+                                        </ui:ThemeShadowChrome>
                                     </StackPanel>
                                 </Popup>
                             </Grid>
                             <ControlTemplate.Triggers>
-                                <EventTrigger RoutedEvent="UIElement.GotKeyboardFocus" SourceName="TextBox">
+                                <EventTrigger RoutedEvent="TextBox.GotMouseCapture" SourceName="TextBox">
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="SuggestionsPopup" Storyboard.TargetProperty="(Popup.IsOpen)">
@@ -94,7 +122,16 @@
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
-                                <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="SuggestionsPopup">
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="SuggestionsPopup">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="SuggestionsPopup" Storyboard.TargetProperty="(Popup.IsOpen)">
+                                                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
+                                            </BooleanAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger SourceName="TextBox">
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="SuggestionsPopup" Storyboard.TargetProperty="(Popup.IsOpen)">
