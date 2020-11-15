@@ -14,7 +14,7 @@ namespace PhotoViewer.App.Helpers
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
                 bi.BeginInit();
-                bi.DecodePixelHeight = 400;
+                bi.DecodePixelHeight = 300;
                 bi.CacheOption = BitmapCacheOption.OnLoad;
                 bi.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
                 bi.StreamSource = stream;

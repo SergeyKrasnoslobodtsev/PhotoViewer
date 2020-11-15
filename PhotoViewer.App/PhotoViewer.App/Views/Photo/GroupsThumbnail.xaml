@@ -26,6 +26,6 @@
         </Grid.RowDefinitions>
         <ToggleButton x:Name="tg_group" IsThreeState="False" Style="{StaticResource GroupCircleButton}" Margin="10 0" Checked="tg_group_Checked" Unchecked="tg_group_Unchecked"/>
         <TextBlock Grid.Column="1" Style="{StaticResource BaseTextBlockStyle}" Margin="0,8,0,5" Text="{Binding Name, Converter={StaticResource DateToStringConverters}}"/>
-        <ListView SelectionChanged="list_SelectionChanged" x:Name="list" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding Preferences, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ListViewStyle}"/>
+        <ListView SelectionChanged="list_SelectionChanged" x:Name="list" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding Preferences, IsAsync=True}" Style="{StaticResource ListViewStyle}"/>
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32.SafeHandles;
+using Microsoft.WindowsAPICodePack.Shell;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -85,11 +86,12 @@ namespace PhotoViewer.App.Helpers
         /// <param name="findData">WIN32_FIND_DATA structure that this
         /// object wraps.</param>
         internal FileData(string dir, WIN32_FIND_DATA findData) {
+            this.Path = System.IO.Path.Combine(dir, findData.cFileName);
+            var data = ShellFile.FromFilePath(System.IO.Path.Combine(dir, findData.cFileName));
             this.Attributes = findData.dwFileAttributes;
 
 
-            this.CreationTimeUtc = ConvertDateTime(findData.ftCreationTime_dwHighDateTime,
-                                                findData.ftCreationTime_dwLowDateTime);
+            this.CreationTimeUtc = Convert.ToDateTime(data.Properties.System.ItemDate.Value);
 
             this.LastAccessTimeUtc = ConvertDateTime(findData.ftLastAccessTime_dwHighDateTime,
                                                 findData.ftLastAccessTime_dwLowDateTime);
@@ -100,7 +102,7 @@ namespace PhotoViewer.App.Helpers
             this.Size = CombineHighLowInts(findData.nFileSizeHigh, findData.nFileSizeLow);
 
             this.Name = findData.cFileName;
-            this.Path = System.IO.Path.Combine(dir, findData.cFileName);
+            
         }
 
         private static long CombineHighLowInts(uint high, uint low) {

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\
+C:\Users\Администратор\source\repos\PhotoViewer\PhotoViewer.App\PhotoViewer.App\obj\Debug\
 PhotoViewer.App
 none
 false
 DEBUG;TRACE
-C:\Users\Админ\Source\Repos\SergeyKrasnoslobodtsev\PhotoViewer\PhotoViewer.App\PhotoViewer.App\App.xaml
-7-392585734
+C:\Users\Администратор\source\repos\PhotoViewer\PhotoViewer.App\PhotoViewer.App\App.xaml
+91489029557
 
-391421128720
-135-1984096872
-MainWindow.xaml;Styles\Icons.xaml;Styles\MiniatureStyle.xaml;Views\Album\AlbumPage.xaml;Views\Maps\MapsPage.xaml;Views\Photo\PhotoPage.xaml;Views\Photo\GroupsThumbnail.xaml;
+40663243560
+1351293088336
+MainWindow.xaml;Styles\AutoSuggestBoxStyle.xaml;Styles\Icons.xaml;Styles\MiniatureStyle.xaml;Styles\ToggleButton.xaml;Views\Album\AlbumPage.xaml;Views\Maps\MapsPage.xaml;Views\Photo\PhotoPage.xaml;Views\Photo\GroupsThumbnail.xaml;
 
-True
+False
 

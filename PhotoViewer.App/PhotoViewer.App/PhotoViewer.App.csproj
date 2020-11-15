@@ -124,6 +124,7 @@
     <Compile Include="Services\Navigation\INavigationServiceEx.cs" />
     <Compile Include="Services\Navigation\NavigationServiceEx.cs" />
     <Compile Include="Services\Navigation\Pages.cs" />
+    <Compile Include="Utils\PreferenceGroup.cs" />
     <Compile Include="Utils\ImageMeasurer.cs" />
     <Compile Include="ViewModel\Album\AlbumViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -154,11 +155,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Styles\AutoSuggestBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\MiniatureStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ToggleButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

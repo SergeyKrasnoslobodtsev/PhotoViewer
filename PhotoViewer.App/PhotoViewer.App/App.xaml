@@ -12,7 +12,10 @@
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
                 <!-- Other merged dictionaries here -->
-                <ResourceDictionary Source="/PhotoViewer.App;component/Styles/Icons.xaml" />
+                <ResourceDictionary Source="Styles/Icons.xaml" />
+                <ResourceDictionary Source="Styles/MiniatureStyle.xaml" />
+                <ResourceDictionary Source="Styles/ToggleButton.xaml" />
+                <ResourceDictionary Source="Styles/AutoSuggestBoxStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
             <vm:ViewModelLocator x:Key="Locator" />

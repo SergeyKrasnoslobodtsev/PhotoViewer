@@ -1,4 +1,5 @@
-﻿using PhotoViewer.App.ViewModel;
+﻿using PhotoViewer.App.Utils;
+using PhotoViewer.App.ViewModel;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;

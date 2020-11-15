@@ -35,12 +35,12 @@ namespace PhotoViewer.App.Utils
             }
 
             var control = new System.Windows.Controls.Image();
-            control.Source = Helpers.ImageHelpers.CreateBitmap(img);
+            //control.Source = Helpers.ImageHelpers.CreateBitmap(img);
 
-            control.Measure(new System.Windows.Size(double.PositiveInfinity, double.PositiveInfinity));
+            //control.Measure(new System.Windows.Size(double.PositiveInfinity, double.PositiveInfinity));
 
-            _lineHeight = control.DesiredSize.Height;
-            _charWidth = control.DesiredSize.Width;
+            _lineHeight = 400; //control.DesiredSize.Height;
+            _charWidth = 400;// control.DesiredSize.Width;
         }
     }
 }
