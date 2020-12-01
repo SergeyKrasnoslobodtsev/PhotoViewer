@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Администратор\source\repos\PhotoViewer\PhotoViewer.App\PhotoViewer.App\App.xaml
-91489029557
-
-39-304683501
-1351293088336
-MainWindow.xaml;Styles\AutoSuggestBoxStyle.xaml;Styles\Icons.xaml;Styles\MiniatureStyle.xaml;Styles\ToggleButton.xaml;Views\Album\AlbumPage.xaml;Views\Maps\MapsPage.xaml;Views\Photo\PhotoPage.xaml;Views\Photo\GroupsThumbnail.xaml;
+101346181399
+2-1548563534
+42-671004028
+141924984130
+Controls\Thumbnail.xaml;MainWindow.xaml;Styles\AutoSuggestBoxStyle.xaml;Styles\Icons.xaml;Styles\MiniatureStyle.xaml;Styles\ToggleButton.xaml;Views\Album\AlbumPage.xaml;Views\Maps\MapsPage.xaml;Views\Photo\PhotoPage.xaml;Views\Photo\GroupsThumbnail.xaml;
 
 False
 

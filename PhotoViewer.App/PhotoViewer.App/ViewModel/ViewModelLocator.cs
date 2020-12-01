@@ -16,8 +16,7 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using PhotoViewer.App.Services;
-using PhotoViewer.App.Services.Navigation;
-using System;
+using PhotoViewer.App.Utils;
 
 namespace PhotoViewer.App.ViewModel
 {
@@ -33,6 +32,8 @@ namespace PhotoViewer.App.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             if (ViewModelBase.IsInDesignModeStatic) {
                 // Create design time view services and models
                 SimpleIoc.Default.Register<IDataService, DataService>();
@@ -45,14 +46,15 @@ namespace PhotoViewer.App.ViewModel
             SimpleIoc.Default.Register<PhotoViewModel>();
             SimpleIoc.Default.Register<AlbumViewModel>();
             SimpleIoc.Default.Register<MapsViewModel>();
-
+            SimpleIoc.Default.Register<GroupsThumbnailViewModel>();
+            SimpleIoc.Default.Register<PreferenceGroup>();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
-
         public PhotoViewModel Photo => ServiceLocator.Current.GetInstance<PhotoViewModel>();
         public AlbumViewModel Album => ServiceLocator.Current.GetInstance<AlbumViewModel>();
         public MapsViewModel Maps => ServiceLocator.Current.GetInstance<MapsViewModel>();
+        public PreferenceGroup Thumbnails => ServiceLocator.Current.GetInstance<PreferenceGroup>();
 
         public static void Cleanup()
         {

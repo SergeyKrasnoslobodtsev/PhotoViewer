@@ -1,23 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using PhotoViewer.App.Controls.SmoothPanel;
-using PhotoViewer.App.Model;
 using PhotoViewer.App.Services;
 using PhotoViewer.App.Utils;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Navigation;
-using System.Windows.Threading;
 
 namespace PhotoViewer.App.ViewModel
 {

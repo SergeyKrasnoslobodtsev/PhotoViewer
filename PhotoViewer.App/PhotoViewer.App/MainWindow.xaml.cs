@@ -1,7 +1,5 @@
 ﻿using ModernWpf.Controls;
-using PhotoViewer.App.Services;
 using PhotoViewer.App.Views;
-using System;
 using System.Windows;
 
 namespace PhotoViewer.App
@@ -15,31 +13,31 @@ namespace PhotoViewer.App
             InitializeComponent();
         }
 
-        private void Nav_SelectionChanged(ModernWpf.Controls.NavigationView sender, ModernWpf.Controls.NavigationViewSelectionChangedEventArgs args) {
+        private void Nav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args) {
 
-                var selectedItem = (NavigationViewItem)args.SelectedItem;
-                if (selectedItem != null) {
-                    string selectedItemTag = (string)selectedItem.Tag;
-                    switch (selectedItemTag) {
-                        case "Photo":
-                            content.Navigate(typeof(PhotoPage));
-                            break;
-                        case "Album":
-                            content.Navigate(typeof(AlbumPage));
-                            break;
+            var selectedItem = (NavigationViewItem)args.SelectedItem;
+            if (selectedItem != null) {
+                string selectedItemTag = (string)selectedItem.Tag;
+                switch (selectedItemTag) {
+                    case "Photo":
+                        content.Navigate(typeof(PhotoPage));
+                        break;
+                    case "Album":
+                        content.Navigate(typeof(AlbumPage));
+                        break;
                     case "Maps":
                         content.Navigate(typeof(MapsPage));
                         break;
                     default:
-                            content.Navigate(typeof(PhotoPage));
-                            break;
-                    }
+                        content.Navigate(typeof(PhotoPage));
+                        break;
+                }
 
-                    //sender.Header = "Sample Page " + selectedItemTag.Substring(selectedItemTag.Length - 1);
-                    //string pageName = "SamplesCommon.SamplePages." + selectedItemTag;
-                    //Type pageType = typeof(PhotoPage).Assembly.GetType(pageName);
-                    //content.Navigate(typeof(PhotoPage));
-                
+                //sender.Header = "Sample Page " + selectedItemTag.Substring(selectedItemTag.Length - 1);
+                //string pageName = "SamplesCommon.SamplePages." + selectedItemTag;
+                //Type pageType = typeof(PhotoPage).Assembly.GetType(pageName);
+                //content.Navigate(typeof(PhotoPage));
+
             }
         }
     }

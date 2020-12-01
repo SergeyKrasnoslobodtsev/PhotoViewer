@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace PhotoViewer.App.Converters
@@ -13,8 +11,8 @@ namespace PhotoViewer.App.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             try {
                 var path = value as string;
-                var ch = new FileInfo(path);
-                if (ch.Extension == "jpg" || ch.Extension == "jpeg") {
+                var file = new FileInfo(path);
+                if (file.Extension == ".jpg" || file.Extension == ".jpeg") {
                     var bitmap = new BitmapImage();
                     if (value != null) {
                         bitmap = Helpers.ImageHelpers.CreateBitmap(path);
@@ -29,9 +27,9 @@ namespace PhotoViewer.App.Converters
                     }
                     return bitmap;
                 }
-                return path;
-                
-            }catch {
+                return null;
+            }
+            catch {
                 return null;
             }
         }
@@ -39,7 +37,5 @@ namespace PhotoViewer.App.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
             throw new NotSupportedException();
         }
-
-        
     }
 }

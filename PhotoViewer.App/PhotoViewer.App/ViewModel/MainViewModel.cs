@@ -1,8 +1,4 @@
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using PhotoViewer.App.Services;
-using PhotoViewer.App.Services.Navigation;
-using System;
 
 namespace PhotoViewer.App.ViewModel
 {
@@ -27,23 +23,21 @@ namespace PhotoViewer.App.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IDataService dataService)
+        public MainViewModel()
         {
             Helpers.Drive drive = new Helpers.Drive(@"E:\");
             TotalSizeValueDisk = drive.TotalSize;
             AvailableSizeDisk = drive.AvailableFreeSpace;
             CurrentValue = drive.CurrentValue;
             MaxValue = drive.MaxValue;
-            //if (IsInDesignMode)
-            //{
-            //    // Code runs in Blend --> create design time data.
-            //}
-            //else
-            //{
-            //    // Code runs "for real"
-            //}
+            ////if (IsInDesignMode)
+            ////{
+            ////    // Code runs in Blend --> create design time data.
+            ////}
+            ////else
+            ////{
+            ////    // Code runs "for real"
+            ////}
         }
-
-        
     }
 }

@@ -12,7 +12,7 @@ namespace PhotoViewer.App.Services
         public Task<IOrderedEnumerable<IGrouping<string, FileData>>> GetGroups() =>
             Task.Run(() =>
             searchPatterns.SelectMany(searchPattern =>
-            FastDirectoryEnumerator.EnumerateFiles(@"D:\", searchPattern, SearchOption.AllDirectories)).
+            FastDirectoryEnumerator.EnumerateFiles(@"D:\SyncFolderImage\Disk 1\с телефона 16.09.17", searchPattern, SearchOption.AllDirectories)).
             GroupBy(p => p.CreationTime.ToString("d")).
             OrderByDescending(p => Convert.ToDateTime(p.Key)));
 
