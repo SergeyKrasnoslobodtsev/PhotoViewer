@@ -2,7 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PhotoViewer.App.Controls"
+             xmlns:view="clr-namespace:PhotoViewer.App.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border Margin="2" x:Name="border" Background="#e3f2fd">
@@ -15,29 +18,39 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <MediaElement Name="Media" Source="{Binding file, Converter={StaticResource ValueToUriConverter}}" LoadedBehavior="Manual" ScrubbingEnabled="True" Grid.RowSpan="2" Grid.ColumnSpan="2" MouseEnter="Media_MouseEnter" MouseLeave="Media_MouseLeave" />
+            <MediaElement Name="Media" Source="{Binding file, Converter={StaticResource ValueToUriConverter}}" LoadedBehavior="Manual" ScrubbingEnabled="True" Grid.RowSpan="2" Grid.ColumnSpan="2" MouseEnter="Media_MouseEnter" MouseLeave="Media_MouseLeave">
+                <MediaElement.Style>
+                    <Style TargetType="{x:Type MediaElement}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding tg_item.IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Thumbnail}}}" Value="True">
+                                <Setter Property="Margin" Value="20"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MediaElement.Style>
+            </MediaElement>
             <Image Grid.RowSpan="2" Grid.ColumnSpan="2" Source="{Binding file, Converter={StaticResource UriToImageConverter}, IsAsync=True}">
                 <Image.Style>
                     <Style TargetType="{x:Type Image}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsSelected, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}, Mode=FindAncestor}}" Value="True">
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Path=IsSelected}" Value="True">
                                 <Setter Property="Margin" Value="20"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Image.Style>
             </Image>
-            <ToggleButton x:Name="tg_item" Opacity="10" Style="{StaticResource ItemCircleButton}"  VerticalAlignment="Top" Margin="10" HorizontalAlignment="Left">
-                <ToggleButton.IsChecked>
-                    <MultiBinding Converter="{StaticResource MultiConverter}">
-                        <Binding Path="IsSelected" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}"/>
-                        <Binding Path="IsSelectedItem" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
-                    </MultiBinding>
-                </ToggleButton.IsChecked>
+            <ToggleButton x:Name="tg_item" Opacity="10" Style="{StaticResource ItemCircleButton}" IsChecked="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Path=IsSelected}" VerticalAlignment="Top" Margin="10" HorizontalAlignment="Left">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger  EventName="Checked">
+                        <i:InvokeCommandAction Command="{Binding DataContext.SelectedItemCommand, RelativeSource={RelativeSource AncestorType={x:Type view:GroupsThumbnail}, Mode=FindAncestor}}" 
+                                           CommandParameter="{Binding ElementName=tg_item, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </ToggleButton>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
-                <TextBlock x:Name="time" Margin="0 5" Style="{StaticResource BaseTextBlockStyle}" Text="{Binding file, Converter={StaticResource FileToTotalTimeDuractionConverter}}" Foreground="White" Visibility="{Binding file, Converter={StaticResource BooleanToVisibilityVideoConverter}}"/>
-                <Button x:Name="play" Opacity="10" Style="{StaticResource PlayCircleButton}" Visibility="{Binding file, Converter={StaticResource BooleanToVisibilityVideoConverter}}" Click="play_Click" />
+                <TextBlock x:Name="time" Margin="0 5" Style="{StaticResource BaseTextBlockStyle}" Text="{Binding IsVideoFile}" Foreground="White" Visibility="{Binding IsVideoFile, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Button x:Name="play" Opacity="10" Style="{StaticResource PlayCircleButton}" Visibility="{Binding IsVideoFile, Converter={StaticResource BooleanToVisibilityConverter}}" Click="play_Click" />
             </StackPanel>
         </Grid>
     </Border>

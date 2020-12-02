@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:PhotoViewer.App.Controls"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              x:Class="PhotoViewer.App.Views.GroupsThumbnail"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -22,9 +24,33 @@
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ToggleButton x:Name="tg_group" IsThreeState="False" Style="{StaticResource GroupCircleButton}" Margin="10 0" Checked="tg_group_Checked" Unchecked="tg_group_Unchecked"/>
+        <ToggleButton x:Name="tg_group" IsThreeState="False" Style="{StaticResource GroupCircleButton}" Margin="10 0" IsChecked="{Binding IsSelectedGroup}"/>
         <TextBlock Grid.Column="1" Style="{StaticResource BaseTextBlockStyle}" Margin="0,8,0,5" Text="{Binding Name, Converter={StaticResource DateToStringConverters}}"/>
-        <ListView SelectionChanged="list_SelectionChanged" x:Name="list" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding Preferences, IsAsync=True}" Style="{StaticResource ListViewStyle}"/>
-
+        <ListView x:Name="list" Grid.ColumnSpan="2" Grid.Row="1" 
+                  ItemsSource="{Binding Preferences, IsAsync=True}"
+                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=tg_group}" Value="True">
+                            <Setter Property="IsSelected" Value="True"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <controls:Thumbnail/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
     </Grid>
 </UserControl>

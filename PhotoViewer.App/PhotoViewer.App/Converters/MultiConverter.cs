@@ -12,8 +12,8 @@ namespace PhotoViewer.App.Converters
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             bool val1 = (bool)values[0];
-            bool val2 = (bool)values[1];
-            val2 = val1;
+            //bool val2 = (bool)values[1];
+            //val2 = val1;
             return val1;
         }
 

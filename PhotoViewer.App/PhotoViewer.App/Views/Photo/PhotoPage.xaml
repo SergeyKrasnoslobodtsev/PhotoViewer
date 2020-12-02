@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:control="clr-namespace:PhotoViewer.App.Controls.SmoothPanel"
-      xmlns:utils="clr-namespace:PhotoViewer.App.Utils"
+      xmlns:vm="clr-namespace:PhotoViewer.App.ViewModel"
       xmlns:ui="http://schemas.modernwpf.com/2019"
       xmlns:local="clr-namespace:PhotoViewer.App.Views"
       mc:Ignorable="d" 
@@ -40,7 +40,7 @@
                 <ItemsPanelTemplate>
                     <control:SmoothPanel>
                         <control:SmoothPanel.Templates>
-                            <control:SmoothPanelTemplate View="{x:Type local:GroupsThumbnail}" ViewModel="{x:Type utils:PreferenceGroup}" />
+                            <control:SmoothPanelTemplate View="{x:Type local:GroupsThumbnail}" ViewModel="{x:Type vm:GroupsThumbnaiViewModel}" />
                         </control:SmoothPanel.Templates>
                     </control:SmoothPanel>
                 </ItemsPanelTemplate>

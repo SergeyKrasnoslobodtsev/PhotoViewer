@@ -149,7 +149,7 @@
     <Compile Include="Services\Navigation\INavigationServiceEx.cs" />
     <Compile Include="Services\Navigation\NavigationServiceEx.cs" />
     <Compile Include="Services\Navigation\Pages.cs" />
-    <Compile Include="Utils\PreferenceGroup.cs" />
+    <Compile Include="ViewModel\Photo\GroupsThumbnaiViewModel.cs" />
     <Compile Include="Utils\ImageMeasurer.cs" />
     <Compile Include="ViewModel\Album\AlbumViewModel.cs" />
     <Compile Include="ViewModel\GroupsThumbnailViewModel.cs" />

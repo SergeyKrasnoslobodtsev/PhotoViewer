@@ -47,14 +47,14 @@ namespace PhotoViewer.App.ViewModel
             SimpleIoc.Default.Register<AlbumViewModel>();
             SimpleIoc.Default.Register<MapsViewModel>();
             SimpleIoc.Default.Register<GroupsThumbnailViewModel>();
-            SimpleIoc.Default.Register<PreferenceGroup>();
+            SimpleIoc.Default.Register<GroupsThumbnaiViewModel>();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public PhotoViewModel Photo => ServiceLocator.Current.GetInstance<PhotoViewModel>();
         public AlbumViewModel Album => ServiceLocator.Current.GetInstance<AlbumViewModel>();
         public MapsViewModel Maps => ServiceLocator.Current.GetInstance<MapsViewModel>();
-        public PreferenceGroup Thumbnails => ServiceLocator.Current.GetInstance<PreferenceGroup>();
+        public GroupsThumbnaiViewModel Thumbnails => ServiceLocator.Current.GetInstance<GroupsThumbnaiViewModel>();
 
         public static void Cleanup()
         {
